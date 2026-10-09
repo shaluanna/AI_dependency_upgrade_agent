@@ -1,0 +1,43 @@
+{
+    "project_path": "sample_project",
+    "dependencies": [
+        {
+            "name": "Django",
+            "current_version": "4.2.10",
+            "latest_version": "6.1.2",
+            "update_available": true,
+            "error": null
+        },
+        {
+            "name": "requests",
+            "current_version": "2.31.0",
+            "latest_version": "2.34.2",
+            "update_available": true,
+            "error": null
+        }
+    ],
+    "code_findings": [
+        {
+            "file": "sample_project\\app.py",
+            "line": 1,
+            "issue": "Legacy Django URL import",
+            "severity": "MEDIUM",
+            "suggestion": "Consider migrating to django.urls.path() or re_path()."
+        }
+    ],
+    "test_result": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "return_code": 2,
+        "output": "\n=================================== ERRORS ====================================\n_____________________ ERROR collecting tests/test_app.py ______________________\nImportError while importing test module 'E:\\ai_dependency_upgrade_agent\\sample_project\\tests\\test_app.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nC:\\Users\\SHALU\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\importlib\\__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\test_app.py:1: in <module>\n    from app import add\napp.py:1: in <module>\n    from django.conf.urls import url\nE   ModuleNotFoundError: No module named 'django'\n=========================== short test summary info ===========================\nERROR tests/test_app.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.27s\n\n"
+    },
+    "risk_level": "MEDIUM",
+    "risk_score": 6,
+    "documentation": [
+        "# Python Dependency Upgrade Runbook\n\n## Before upgrading\n\n1. Create a Git branch.\n2. Record the currently installed versions.\n3. Run the existing test suite.\n4. Review dependency release notes.\n5. Search the source code for deprecated APIs.\n\n## During the upgrade\n\nUpgrade dependencies in controlled steps.\n\nAvoid upgrading every package simultaneously when compatibility\nis uncertain.\n\n## After upgrading\n\n1. Install the new versions.\n2. Run automated tests.\n3. Review failures.\n4. Check application startup.\n5. Check integration points.\n6. Review warnings and deprecated APIs.\n\n## Rollback\n\nIf the application becomes unstable:\n\n1. Restore the previous requirements file.\n2. Reinstall previous versions.\n3. Re-run tests.\n4. Review the failed upgrade.",
+        "# Django Upgrade Notes\n\n## URL routing\n\nOlder Django applications may contain legacy URL APIs such as:\n\n```python\ndjango.conf.urls.url\n```\n\nor:\n\n```python\ndjango.urls.url\n```\n\nFor newer Django projects, these are generally replaced with:\n\n```python\ndjango.urls.path\n```\n\nand:\n\n```python\ndjango.urls.re_path\n```\n\n## Upgrade process\n\nBefore upgrading Django:\n\n1. Check the version currently used by the project.\n2. Check which Python versions are supported by the target Django version.\n3. Review the relevant Django release notes.\n4. Search the source code for deprecated APIs.\n5. Run the existing test suite.\n\nAfter the upgrade:\n\n1. Run the test suite again.\n2. Start the development server.\n3. Check URL routing.\n4. Check models and migrations.\n5. Check templates.\n6. Check authentication.\n7. Review Django warnings and deprecation messages.\n",
+        "# Sample Project Upgrade Notes\n\n## Django\n\nOlder Django projects may still use the legacy URL APIs:\n\n* `django.conf.urls.url`\n* `django.urls.url`\n\nWhen updating the project, check the URL configuration and consider replacing these with the newer APIs:\n\n* `django.urls.path`\n* `django.urls.re_path`\n\nAfter making the changes, run the existing test suite to make sure the application still works as expected.\n\n## Requests\n\nWhen upgrading the `requests` package, check the areas that are most likely to be affected:\n\n* Authentication behaviour\n* Timeout handling\n* Response handling\n* Deprecated APIs\n* Existing test coverage\n"
+    ],
+    "ai_analysis": "Gemini AI analysis was temporarily unavailable.\n\nFallback Compatibility Analysis\n--------------------------------\nRisk level: MEDIUM\nRisk score: 6\n\nDependency Recommendations:\n- Review upgrade for Django: 4.2.10 -> 6.1.2\n- Review upgrade for requests: 2.31.0 -> 2.34.2\n\nCode Compatibility Findings:\n- sample_project\\app.py:1 Legacy Django URL import\n  Recommendation: Consider migrating to django.urls.path() or re_path().\n\nTest Status:\n- Passed: 0\n- Failed: 0\n- Skipped: 0\n- Return code: 2\n\nRecommended Next Steps:\n- Review dependency upgrade compatibility.\n- Review deprecated or legacy APIs identified by the source-code analyzer.\n- Run the project test suite after applying compatibility changes."
+}
